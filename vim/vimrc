@@ -51,7 +51,7 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
-set history=500 " Set how many lines of history VIM has to remember 
+set history=500 " Set how many lines of history VIM has to remember
 
 set autoread " detect when a file is changed
 
@@ -69,7 +69,7 @@ set foldnestmax=10 " deepest fold is 10 levels
 set nofoldenable " don't fold by default
 set foldlevel=1
 
-" :W sudo saves the file 
+" :W sudo saves the file
 " " (useful for handling the permission-denied error)
 command W w !sudo tee % > /dev/null
 
@@ -77,8 +77,8 @@ command W w !sudo tee % > /dev/null
 " => Text, tab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-set noexpandtab " insert tabs rather than spaces for <Tab>
-" set expandtab " insert spaces for <Tab>
+" set noexpandtab " insert tabs rather than spaces for <Tab>
+set expandtab " insert spaces for <Tab>
 set smarttab " tab respects 'tabstop', 'shiftwidth', and 'softtabstop'
 set tabstop=4 " the visible width of tabs
 set softtabstop=4 " edit as if the tabs are 4 characters wide
@@ -256,7 +256,7 @@ map <leader>ba :bufdo bd<cr>
 map <leader>tn :tabnew<cr>
 map <leader>to :tabonly<cr>
 map <leader>tc :tabclose<cr>
-map <leader>tm :tabmove 
+map <leader>tm :tabmove
 map <leader>t<leader> :tabnext
 
 " Let 'tl' toggle between this and the last accessed tab
@@ -272,7 +272,7 @@ map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
-" Specify the behavior when switching between buffers 
+" Specify the behavior when switching between buffers
 try
     set switchbuf=useopen,usetab,newtab
     set stal=2

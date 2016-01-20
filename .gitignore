@@ -6,3 +6,4 @@
 !/vim/
 !/zsh/
 .DS_Store
+*.swp
