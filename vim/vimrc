@@ -32,6 +32,7 @@ Plugin 'airblade/vim-gitgutter'
 " Plugin 'Valloric/YouCompleteMe'
 " Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 
 " Plugin 'chriskempson/base16-vim'
 Plugin 'flazz/vim-colorschemes'
