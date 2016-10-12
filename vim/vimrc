@@ -89,9 +89,9 @@ set shiftround " round indent to a multiple of 'shiftwidth'
 set ai "Auto indent
 set si "Smart indent
 set wrap "Wrap lines
-set wrapmargin=8 " wrap lines when coming within n characters from side
+" set wrapmargin=8 " wrap lines when coming within n characters from side
 " set textwidth=120 " Set text wrapping
-" set linebreak " set soft wrapping
+set linebreak " set soft wrapping
 set showbreak=... " show ellipsis at breaking
 
 set list
