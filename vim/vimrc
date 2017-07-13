@@ -23,19 +23,21 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-Plugin 'kien/ctrlp.vim' " fuzzy find files
+" Plugin 'kien/ctrlp.vim' " fuzzy find files
 Plugin 'scrooloose/nerdtree' " file drawer, open with :NERDTreeToggle
-Plugin 'benmills/vimux'
-Plugin 'tpope/vim-fugitive'
+" Plugin 'benmills/vimux'
+" Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/syntastic'
 Plugin 'airblade/vim-gitgutter'
 " Plugin 'Valloric/YouCompleteMe'
 " Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+" Bundle 'edkolev/tmuxline.vim'
 
 " Plugin 'chriskempson/base16-vim'
 Plugin 'flazz/vim-colorschemes'
+Plugin 'Yggdroot/indentLine'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -192,10 +194,10 @@ set ffs=unix,dos,mac
 
 if &term =~ '^screen'
 " tmux will send xterm-style keys when its xterm-keys option is on
-	execute "set <xUp>=\e[1;*A"
-	execute "set <xDown>=\e[1;*B"
-	execute "set <xRight>=\e[1;*C"
-	execute "set <xLeft>=\e[1;*D"
+    execute "set <xUp>=\e[1;*A"
+    execute "set <xDown>=\e[1;*B"
+    execute "set <xRight>=\e[1;*C"
+    execute "set <xLeft>=\e[1;*D"
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -392,17 +394,29 @@ nmap <silent> <leader>y :NERDTreeFind<cr>
 
 " map fuzzyfinder (CtrlP) plugin
 " nmap <silent> <leader>t :CtrlP<cr>
-nmap <silent> <leader>r :CtrlPBuffer<cr>
-let g:ctrlp_map='<leader>t'
-let g:ctrlp_dotfiles=1
-let g:ctrlp_working_path_mode = 'ra'
+"nmap <silent> <leader>r :CtrlPBuffer<cr>
+"let g:ctrlp_map='<leader>t'
+"let g:ctrlp_dotfiles=1
+"let g:ctrlp_working_path_mode = 'ra'
 
 " CtrlP ignore patterns
-let g:ctrlp_custom_ignore = {
-            \ 'dir': '\.git$\|node_modules$\|\.hg$\|\.svn$',
-            \ 'file': '\.exe$\|\.so$'
-            \ }
+"let g:ctrlp_custom_ignore = {
+"            \ 'dir': '\.git$\|node_modules$\|\.hg$\|\.svn$',
+"            \ 'file': '\.exe$\|\.so$'
+"            \ }
 " search the nearest ancestor that contains .git, .hg, .svn
-let g:ctrlp_working_path_mode = 2
+"let g:ctrlp_working_path_mode = 2
 
-let g:airline_theme='bubblegum'
+let g:airline_theme = 'bubblegum'
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+
+let g:indentLine_char = '|'
+let g:indentLine_color_term = 239
+
+" For generating tmux theme (tmuxline.vim)
+" let g:airline#extensions#tmuxline#enabled = 0
+" let g:tmuxline_theme = 'jellybeans'
+" let g:tmuxline_preset = 'full'
