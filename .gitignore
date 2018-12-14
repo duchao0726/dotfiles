@@ -5,5 +5,6 @@
 !/tmux/
 !/vim/
 !/zsh/
+!/others/
 .DS_Store
 *.swp

@@ -38,6 +38,8 @@ Plugin 'vim-airline/vim-airline-themes'
 " Plugin 'chriskempson/base16-vim'
 Plugin 'flazz/vim-colorschemes'
 " Plugin 'Yggdroot/indentLine'
+" Plugin 'nvie/vim-flake8'
+Plugin 'tell-k/vim-autopep8'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -426,3 +428,16 @@ let g:airline#extensions#tabline#show_close_button = 0
 " let g:airline#extensions#tmuxline#enabled = 0
 " let g:tmuxline_theme = 'jellybeans'
 " let g:tmuxline_preset = 'full'
+
+let g:syntastic_check_on_open = 1
+let g:syntastic_python_checkers = ['pycodestyle']
+
+autocmd FileType python noremap <buffer> <F3> :call Autopep8()<CR>
+let g:autopep8_on_save=1
+let g:autopep8_aggressive=2
+" let g:autopep8_max_line_length=160
+let g:autopep8_disable_show_diff=0
+
+" autocmd FileType python map <buffer> <F4> :call Flake8()<CR>
+" let g:flake8_show_in_gutter=0
+" let g:flake8_show_in_file=0
