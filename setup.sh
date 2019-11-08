@@ -13,3 +13,6 @@ ln -s ~/.dotfiles/others/pycodestyle ~/.config/pycodestyle
 #sh -c "$(wget -O- https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 curl -Lo install.sh https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh
 #sh install.sh
+
+ln -s ~/.dotfiles/zsh/chao.zsh-theme ~/.oh-my-zsh/custom/themes/chao.zsh-theme
+ln -s ~/.dotfiles/zsh/custom.zsh ~/.oh-my-zsh/custom/custom.zsh
