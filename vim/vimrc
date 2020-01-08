@@ -33,7 +33,7 @@ Plugin 'airblade/vim-gitgutter'
 " Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-" Bundle 'edkolev/tmuxline.vim'
+Bundle 'edkolev/tmuxline.vim'
 
 " Plugin 'chriskempson/base16-vim'
 Plugin 'flazz/vim-colorschemes'
@@ -427,9 +427,9 @@ let g:airline#extensions#tabline#show_close_button = 0
 " let g:indentLine_color_term = 239
 
 " For generating tmux theme (tmuxline.vim)
-" let g:airline#extensions#tmuxline#enabled = 0
-" let g:tmuxline_theme = 'jellybeans'
-" let g:tmuxline_preset = 'full'
+let g:airline#extensions#tmuxline#enabled = 0
+let g:tmuxline_theme = 'jellybeans'
+let g:tmuxline_preset = 'full'
 
 let g:syntastic_check_on_open = 1
 let g:syntastic_python_checkers = ['pycodestyle']
