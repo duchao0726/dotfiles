@@ -1,0 +1,13 @@
+[user]
+	email = duchao0726@gmail.com
+	name = Chao Du
+[push]
+	default = simple
+[diff]
+	tool = vimdiff
+[difftool]
+	prompt = false
+[alias]
+	d = difftool
+[color]
+	ui = true
