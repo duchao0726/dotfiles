@@ -1,176 +1,135 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" vimrc by Chao Du, duchao0726@gmail.com
-"
-" Inspired by
-" https://github.com/amix/vimrc
-" https://github.com/nicknisi/vim-workshop
+" vimrc by Chao Du
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Plugins (vim-plug)
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Auto-install vim-plug if not present
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+call plug#begin('~/.vim/plugged')
+
+" Linting and formatting (ruff, black, isort)
+Plug 'dense-analysis/ale'
+
+" Colorscheme
+Plug 'flazz/vim-colorschemes'
+
+" File explorer
+Plug 'preservim/nerdtree'
+
+" Toggle comments
+Plug 'preservim/nerdcommenter'
+
+" Add as needed:
+" Plug 'airblade/vim-gitgutter'                          " git diff in gutter
+" Plug 'vim-airline/vim-airline'                         " fancy statusline
+" Plug 'vim-airline/vim-airline-themes'
+" Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }   " fuzzy finder (needs fzf binary on server)
+" Plug 'junegunn/fzf.vim'
+
+call plug#end()
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-set nocompatible              " be iMproved, required
-filetype off                  " required
-
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-
-" Plugin 'kien/ctrlp.vim' " fuzzy find files
-Plugin 'scrooloose/nerdtree' " file drawer, open with :NERDTreeToggle
-" Plugin 'benmills/vimux'
-" Plugin 'tpope/vim-fugitive'
-Plugin 'scrooloose/syntastic'
-Plugin 'airblade/vim-gitgutter'
-" Plugin 'Valloric/YouCompleteMe'
-" Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Bundle 'edkolev/tmuxline.vim'
-
-" Plugin 'chriskempson/base16-vim'
-Plugin 'flazz/vim-colorschemes'
-" Plugin 'Yggdroot/indentLine'
-" Plugin 'nvie/vim-flake8'
-Plugin 'tell-k/vim-autopep8'
-Plugin 'Chiel92/vim-autoformat'
-Plugin 'scrooloose/nerdcommenter'
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
-
-set history=500 " Set how many lines of history VIM has to remember
-
-set autoread " detect when a file is changed
-
-set backspace=indent,eol,start " make backspace behave in a same manner
-
-let mapleader = ',' " set a map leader for more key combos
-
+set history=500
+set autoread
+set backspace=indent,eol,start
+let mapleader = ','
 set clipboard=unnamed
+set ttyfast
 
-set ttyfast " faster redrawing
-
-" code folding settings
-set foldmethod=syntax " fold based on indent
-set foldnestmax=10 " deepest fold is 10 levels
-set nofoldenable " don't fold by default
+" code folding
+set foldmethod=syntax
+set foldnestmax=10
+set nofoldenable
 set foldlevel=1
 
-" :W sudo saves the file
-" " (useful for handling the permission-denied error)
+" sudo save
 command W w !sudo tee % > /dev/null
 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Text, tab and indent related
+" => Text, tab and indent
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" set noexpandtab " insert tabs rather than spaces for <Tab>
-set expandtab " insert spaces for <Tab>
-set smarttab " tab respects 'tabstop', 'shiftwidth', and 'softtabstop'
-set tabstop=4 " the visible width of tabs
-set softtabstop=4 " edit as if the tabs are 4 characters wide
-set shiftwidth=4 " number of spaces to use for indent and unindent
-set shiftround " round indent to a multiple of 'shiftwidth'
+set expandtab
+set smarttab
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set shiftround
 
-set ai "Auto indent
-set si "Smart indent
-set wrap "Wrap lines
-" set wrapmargin=8 " wrap lines when coming within n characters from side
-" set textwidth=120 " Set text wrapping
-set linebreak " set soft wrapping
-set showbreak=... " show ellipsis at breaking
+set ai
+set si
+set wrap
+set linebreak
+set showbreak=...
 
 set list
-"set listchars=eol:¬,tab:>-,trail:-
 set listchars=tab:>-,trail:-
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => User Interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set so=7 " set 7 lines to the cursors - when moving vertical
 
-set wildmenu " enhanced command line completion
-set hidden " current buffer can be put into background
-set showcmd " show incomplete commands
-set wildmode=list:longest " complete files like a shell
+set so=7
+set wildmenu
+set hidden
+set showcmd
+set wildmode=list:longest
+set wildignore=*.o,*~,*.pyc,.git\*,.hg\*,.svn\*
 
-set wildignore=*.o,*~,*.pyc
-if has("win16") || has("win32")
-    set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
-else
-    set wildignore+=.git\*,.hg\*,.svn\*
-endif
+set ruler
+set title
+set cmdheight=1
 
-set ruler " Always show current position
-set title " set terminal title
-set cmdheight=1 " Height of the command bar
-
-" In many terminal emulators the mouse works just fine, thus enable it.
 if has('mouse')
     set mouse=a
-    set ttymouse=xterm2
 endif
 
-" Searching
-set ignorecase " case insensitive searching
-set smartcase " case-sensitive if expresson contains a capital letter
+set ignorecase
+set smartcase
 set hlsearch
-set incsearch " set incremental search, like modern browsers
-set nolazyredraw " don't redraw while executing macros
+set incsearch
+set nolazyredraw
+set magic
+set showmatch
+set mat=2
 
-set magic " Set magic on, for regex
-
-set showmatch " show matching braces
-set mat=2 " how many tenths of a second to blink
-
-" No annoying sound on errors
 set noerrorbells
 set novisualbell
 set t_vb=
 set tm=500
 
 set number
-" set relativenumber " show relative line numbers
 set cursorline
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Status line
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Always show the status line
+
 set laststatus=2
 
-" Format the status line
-" set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Enable syntax highlighting
-syntax enable " syntax enable keeps your color settings, syntax on overrides them
 
+syntax enable
 set encoding=utf8
-let base16colorspace=256
 set t_Co=256
 set background=dark
 
@@ -179,130 +138,97 @@ try
 catch
 endtry
 
-" Use Unix as the standard file type
 set ffs=unix,dos,mac
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Turn backup off, since most stuff is in SVN, git et.c anyway...
-"set nobackup
-"set nowb
-"set noswapfile
+
 set backupdir=~/.vim/tmpfiles//
 set directory=~/.vim/tmpfiles//
 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Mappings: Fixing key in Tmux
+" => Mappings: Fixing keys in Tmux
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 if &term =~ '^screen'
-" tmux will send xterm-style keys when its xterm-keys option is on
     execute "set <xUp>=\e[1;*A"
     execute "set <xDown>=\e[1;*B"
     execute "set <xRight>=\e[1;*C"
     execute "set <xLeft>=\e[1;*D"
 endif
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Mappings: Visual mode related
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Visual mode pressing * or # searches for the current selection
-" Super useful! From an idea by Michael Naumann
-vnoremap <silent> * :call VisualSelection('f', '')<CR>
-vnoremap <silent> # :call VisualSelection('b', '')<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Mappings: Moving around, tabs, windows and buffers
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <leader>wc :wincmd q<cr>
 
-" moving up and down work as you would expect
 nnoremap <silent> j gj
 nnoremap <silent> k gk
 nnoremap <silent> ^ g^
 nnoremap <silent> $ g$
 
-" scroll the viewport faster
 nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
 
-" Map <Space> to / (search)
 map <space> /
-
-" Disable highlight when <leader><cr> is pressed
 map <silent> <leader><cr> :noh<cr>
 
-" helpers for dealing with other people's code
 nmap \t :set ts=4 sts=4 sw=4 noet<cr>
 nmap \s :set ts=4 sts=4 sw=4 et<cr>
 
-" switching tabs
 map <F7> :tabp<cr>
 map <F8> :tabn<cr>
 
-" moving between windows
 map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
-" moving between or create windows
-map <C-LEFT> :call WinMove('h')<cr>
-map <C-DOWN> :call WinMove('j')<cr>
-map <C-UP> :call WinMove('k')<cr>
+map <C-LEFT>  :call WinMove('h')<cr>
+map <C-DOWN>  :call WinMove('j')<cr>
+map <C-UP>    :call WinMove('k')<cr>
 map <C-RIGHT> :call WinMove('l')<cr>
 
-" Close the current buffer
-map <leader>bd :Bclose<cr>
-
-" Close all the buffers
+map <leader>bd :bd<cr>
 map <leader>ba :bufdo bd<cr>
 
-" Useful mappings for managing tabs
 map <leader>tn :tabnew<cr>
 map <leader>to :tabonly<cr>
 map <leader>tc :tabclose<cr>
 map <leader>tm :tabmove
-map <leader>t<leader> :tabnext
 
-" Let 'tl' toggle between this and the last accessed tab
 let g:lasttab = 1
 nmap <Leader>tl :exe "tabn ".g:lasttab<CR>
 au TabLeave * let g:lasttab = tabpagenr()
 
-
-" Opens a new tab with the current buffer's path
-" Super useful when editing files in the same directory
 map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
-
-" Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
-" Specify the behavior when switching between buffers
 try
     set switchbuf=useopen,usetab,newtab
     set stal=2
 catch
 endtry
 
-" switch between current and last buffer
 nmap <leader>. <c-^>
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Mappings: Editing
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" map <leader>ev :e! ~/.vimrc<cr> " edit ~/.vimrc
+
 map <leader>ev :e! ~/.vimrc<cr>
 nnoremap <F9> :vsp ~/.vimrc<cr>
 
-" Move a line of text using ALT+[jk] or Comamnd+[jk] on MobaXterm
+" Move lines with ALT+[jk]
 nmap <Esc>j mz:m+<cr>`z
 nmap <Esc>k mz:m-2<cr>`z
 vmap <Esc>j :m'>+<cr>`<my`>mzgv`yo`z
 vmap <Esc>k :m'<-2<cr>`>my`<mzgv`yo`z
 
-" Move a line of text using Option or ALT+[jk] on Mac
 if has("mac") || has("macunix")
     nmap ∆ mz:m+<cr>`z
     nmap ˚ mz:m-2<cr>`z
@@ -310,67 +236,44 @@ if has("mac") || has("macunix")
     vmap ˚ :m'<-2<cr>`>my`<mzgv`yo`z
 endif
 
-" enable . command in visual mode
 vnoremap . :normal .<cr>
-
-" remove extra whitespace
 nmap <leader><space> :%s/\s\+$<cr>
-
-" shortcut to save
 nmap <leader>, :w<cr>
-
-" set paste toggle
-set pastetoggle=<F6>
-
-" toggle paste mode
 map <leader>v :set paste!<cr>
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Spell checking
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Pressing ,ss will toggle and untoggle spell checking
-map <leader>ss :setlocal spell!<cr>
 
-" Shortcuts using <leader>
+map <leader>ss :setlocal spell!<cr>
 map <leader>sn ]s
 map <leader>sp [s
 map <leader>sa zg
 map <leader>s? z=
 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Misc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Remove the Windows ^M - when the encodings gets messed up
+
 noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
-
-" Quickly open a buffer for scribble
 map <leader>q :e ~/buffer<cr>
-
-" Quickly open a markdown buffer for scribble
 map <leader>x :e ~/buffer.md<cr>
-
-" Toggle paste mode on and off
-map <leader>pp :setlocal paste!<cr>
-
-" disable Ex mode
 noremap Q <NOP>
-noremap J gj
-noremap K gk
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Functions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Delete trailing white space on save, useful for Python and CoffeeScript ;)
+
 func! DeleteTrailingWS()
     exe "normal mz"
     %s/\s\+$//ge
     exe "normal `z"
 endfunc
 autocmd BufWrite *.py :call DeleteTrailingWS()
-autocmd BufWrite *.coffee :call DeleteTrailingWS()
 
-" Window movement shortcuts
-" move to the window in the direction shown, or create a new window
 function! WinMove(key)
     let t:curwin = winnr()
     exec "wincmd ".a:key
@@ -384,80 +287,47 @@ function! WinMove(key)
     endif
 endfunction
 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Plugin settings
+" => Plugin: NERDTree
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" close NERDTree after a file is opened
-let g:NERDTreeQuitOnOpen=1
-" show hidden files in NERDTree
-let NERDTreeShowHidden=1
-" Toggle NERDTree
+
+let g:NERDTreeQuitOnOpen = 1
+let NERDTreeShowHidden = 1
+let NERDTreeIgnore = ['\.pyc$', '__pycache__', '\.egg-info$']
 nmap <silent> <leader>k :NERDTreeToggle<cr>
-" expand to the path of the file in the current buffer
 nmap <silent> <leader>y :NERDTreeFind<cr>
-let NERDTreeIgnore = ['\.pyc$']
 
-" map fuzzyfinder (CtrlP) plugin
-" nmap <silent> <leader>t :CtrlP<cr>
-"nmap <silent> <leader>r :CtrlPBuffer<cr>
-"let g:ctrlp_map='<leader>t'
-"let g:ctrlp_dotfiles=1
-"let g:ctrlp_working_path_mode = 'ra'
 
-" CtrlP ignore patterns
-"let g:ctrlp_custom_ignore = {
-"            \ 'dir': '\.git$\|node_modules$\|\.hg$\|\.svn$',
-"            \ 'file': '\.exe$\|\.so$'
-"            \ }
-" search the nearest ancestor that contains .git, .hg, .svn
-"let g:ctrlp_working_path_mode = 2
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Plugin: NERDCommenter
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-let g:airline_theme = 'bubblegum'
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#show_buffers = 0
-let g:airline#extensions#tabline#show_splits = 0
-let g:airline#extensions#tabline#show_tabs = 1
-let g:airline#extensions#tabline#show_tab_nr = 0
-let g:airline#extensions#tabline#show_tab_type = 0
-let g:airline#extensions#tabline#close_symbol = '×'
-let g:airline#extensions#tabline#show_close_button = 0
-
-" let g:indentLine_char = '|'
-" let g:indentLine_color_term = 239
-
-" For generating tmux theme (tmuxline.vim)
-let g:airline#extensions#tmuxline#enabled = 0
-let g:tmuxline_theme = 'jellybeans'
-let g:tmuxline_preset = 'full'
-
-let g:syntastic_check_on_open = 1
-let g:syntastic_python_checkers = ['pycodestyle']
-
-autocmd FileType python noremap <buffer> <F3> :call Autopep8()<CR>
-let g:autopep8_on_save=0
-let g:autopep8_aggressive=2
-" let g:autopep8_max_line_length=160
-let g:autopep8_disable_show_diff=0
-
-" autocmd FileType python map <buffer> <F4> :call Flake8()<CR>
-" let g:flake8_show_in_gutter=0
-" let g:flake8_show_in_file=0
-
-" vim-autoformat
-let g:autoformat_verbosemode=1
-
-" Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
-" Use compact syntax for prettified multi-line comments
 let g:NERDCompactSexyComs = 1
-" Align line-wise comment delimiters flush left instead of following code indentation
 let g:NERDDefaultAlign = 'left'
-" Add your own custom formats or override the defaults
-let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
-" Allow commenting and inverting empty lines (useful when commenting a region)
 let g:NERDCommentEmptyLines = 1
-" Enable trimming of trailing whitespace when uncommenting
 let g:NERDTrimTrailingWhitespace = 1
-" Enable NERDCommenterToggle to check all selected lines is commented or not
 let g:NERDToggleCheckAllLines = 1
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Plugin: ALE (linting + formatting)
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let g:ale_linters = {
+\   'python': ['ruff'],
+\}
+let g:ale_fixers = {
+\   'python': ['black', 'isort'],
+\}
+let g:ale_fix_on_save = 0
+let g:ale_python_ruff_options = ''
+let g:ale_sign_error = '✗'
+let g:ale_sign_warning = '⚠'
+
+nmap <F3> :ALEFix<cr>
+nmap <leader>an :ALENextWrap<cr>
+nmap <leader>ap :ALEPreviousWrap<cr>
+
+
