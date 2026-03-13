@@ -5,6 +5,8 @@
 !/tmux/
 !/vim/
 !/zsh/
+!/git/
+!/ghostty/
 !/others/pycodestyle
 .DS_Store
 *.swp

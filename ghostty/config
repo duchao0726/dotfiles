@@ -1,0 +1,38 @@
+# Ghostty config by Chao Du
+
+# Font - MesloLGS NF for Powerlevel10k compatibility
+font-family = MesloLGS NF
+font-size = 14
+
+# Window
+window-padding-x = 8
+window-padding-y = 8
+window-padding-balance = true
+
+# Colors - matches vim colorscheme
+theme = Tomorrow Night Eighties
+
+# Scrollback
+scrollback-limit = 10000
+
+# Copy on select (middle-click to paste)
+copy-on-select = false
+
+# Shell integration
+shell-integration = zsh
+shell-integration-features = no-cursor,sudo,title
+
+# SSH compatibility - remote servers don't have ghostty terminfo
+# This ensures delete/arrow keys work correctly over SSH
+term = xterm-256color
+
+# Quick terminal (hotkey window)
+quick-terminal-position = top
+quick-terminal-screen = main
+quick-terminal-animation-duration = 0.2
+quick-terminal-autohide = true
+keybind = global:opt+space=toggle_quick_terminal
+
+# Cursor
+cursor-style = block
+cursor-style-blink = true

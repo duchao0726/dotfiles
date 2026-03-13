@@ -1,0 +1,41 @@
+[core]
+	excludesfile = ~/.gitignore_global
+
+[push]
+	default = simple
+	autoSetupRemote = true
+
+[pull]
+	rebase = true
+
+[fetch]
+	prune = true
+
+[init]
+	defaultBranch = main
+
+[diff]
+	tool = vimdiff
+
+[difftool]
+	prompt = false
+
+[color]
+	ui = true
+
+[alias]
+	st  = status
+	co  = checkout
+	br  = branch
+	d   = difftool
+	lg  = log --oneline --graph --decorate --all
+	undo = reset HEAD~1 --mixed
+	unstage = reset HEAD --
+
+# Automatically use personal identity for personal repos
+[includeIf "gitdir:~/personal/"]
+	path = ~/.gitconfig.personal
+
+# Automatically use work identity for work repos
+[includeIf "gitdir:~/workspace/projects/"]
+	path = ~/.gitconfig.work
