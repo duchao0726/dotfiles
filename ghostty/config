@@ -8,12 +8,14 @@ font-size = 14
 window-padding-x = 8
 window-padding-y = 8
 window-padding-balance = true
+background-opacity = 0.85
+background-blur-radius = 20
 
 # Colors - matches vim colorscheme
 theme = Tomorrow Night Eighties
 
 # Scrollback
-scrollback-limit = 100000
+scrollback-limit = 10000000
 
 # Copy on select (middle-click to paste)
 copy-on-select = false
