@@ -31,6 +31,7 @@ term = xterm-256color
 # Quick terminal (hotkey window)
 quick-terminal-position = top
 quick-terminal-screen = main
+quick-terminal-size = 70%
 quick-terminal-animation-duration = 0.2
 quick-terminal-autohide = true
 keybind = global:opt+space=toggle_quick_terminal
